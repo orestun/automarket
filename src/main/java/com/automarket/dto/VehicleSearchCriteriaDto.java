@@ -5,8 +5,10 @@ import com.automarket.utils.EngineType;
 import com.automarket.utils.GearboxType;
 import com.automarket.utils.VehicleType;
 import lombok.Getter;
+import lombok.Setter;
 
 @Getter
+@Setter
 public class VehicleSearchCriteriaDto {
     private String make;
     private String model;
