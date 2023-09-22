@@ -9,9 +9,11 @@ import com.automarket.mapper.UserMapper;
 import com.automarket.model.User;
 import com.automarket.repository.UserRepository;
 import jakarta.validation.Valid;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -21,8 +23,12 @@ import java.util.Map;
 public class UserService {
     private final UserRepository userRepository;
     private final UserMapper userMapper = new UserMapper();
-    public UserService(UserRepository userRepository) {
+
+    private final BCryptPasswordEncoder passwordEncoder;
+
+    public UserService(UserRepository userRepository, BCryptPasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     public List<UserDto> getAllUsers(int page, int pageSize) {
@@ -37,6 +43,7 @@ public class UserService {
         validateUserByEmail(user.getEmail());
         validateUserByUsername(user.getUsername());
         validateUserByPhoneNumber(user.getPhoneNumber());
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepository.save(user);
         return userMapper.UserParseToDto(user);
     }

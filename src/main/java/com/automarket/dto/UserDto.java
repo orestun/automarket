@@ -1,9 +1,11 @@
 package com.automarket.dto;
 
+import com.automarket.model.Role;
 import com.automarket.model.Vehicle;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.List;
 import java.util.Set;
 
 @Getter
@@ -17,4 +19,5 @@ public class UserDto {
     private String password;
     private String photoURL;
     private Set<Vehicle> vehiclesForSale;
+    private List<Role> roles;
 }

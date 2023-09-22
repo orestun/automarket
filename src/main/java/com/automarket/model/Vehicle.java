@@ -16,6 +16,7 @@ import java.time.LocalDateTime;
 public class Vehicle {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
     @NotNull(message = "Make field can`t be null")
