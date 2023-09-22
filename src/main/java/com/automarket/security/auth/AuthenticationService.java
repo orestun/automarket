@@ -1,16 +1,13 @@
 package com.automarket.security.auth;
 
 import com.automarket.exception.BadAuthenticationData;
-import com.automarket.exception.ItemNotFoundException;
 import com.automarket.exception.ObjectAlreadyExistsException;
 import com.automarket.model.Role;
 import com.automarket.model.User;
 import com.automarket.repository.UserRepository;
 import com.automarket.security.JwtTokenService;
 import com.automarket.utils.Roles;
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
