@@ -1,8 +1,7 @@
-package com.automarket.service;
+package com.automarket.security;
 
 import com.automarket.exception.ItemNotFoundException;
 import com.automarket.model.User;
-import com.automarket.model.UserDetailsImpl;
 import com.automarket.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;

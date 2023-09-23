@@ -1,5 +1,7 @@
-package com.automarket.model;
+package com.automarket.security;
 
+import com.automarket.model.Role;
+import com.automarket.model.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

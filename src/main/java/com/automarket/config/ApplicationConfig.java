@@ -1,7 +1,7 @@
 package com.automarket.config;
 
 import com.automarket.repository.UserRepository;
-import com.automarket.service.UserDetailsServiceImpl;
+import com.automarket.security.UserDetailsServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;

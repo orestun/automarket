@@ -1,7 +1,6 @@
 package com.automarket.controller;
 
-import com.automarket.dto.VehicleDto;
-import com.automarket.dto.VehicleSearchCriteriaDto;
+import com.automarket.dto.*;
 import com.automarket.mapper.VehicleMapper;
 import com.automarket.model.Vehicle;
 import com.automarket.service.VehicleService;
@@ -24,7 +23,7 @@ public class VehicleController {
     @PostMapping
     public VehicleDto addCar(@RequestBody VehicleDto vehicleDto){
         return vehicleService
-                .addCar(vehicleMapper.vehicleParseFromDto(vehicleDto));
+                .addCar(vehicleMapper.mapFromDto(vehicleDto));
     }
 
     @GetMapping
@@ -39,7 +38,7 @@ public class VehicleController {
     public VehicleDto updateVehicle(
             @PathVariable(name = "id") long id,
             @RequestBody VehicleDto vehicleDto){
-        Vehicle vehicle = vehicleMapper.vehicleParseFromDto(vehicleDto);
+        Vehicle vehicle = vehicleMapper.mapFromDto(vehicleDto);
         return vehicleService
                 .updateVehicleById(id, vehicle);
     }
@@ -56,5 +55,29 @@ public class VehicleController {
             @RequestParam(name = "page", defaultValue = "1", required = false) int page,
             @RequestParam(name = "page-size", defaultValue = "10", required = false) int pageSize){
         return vehicleService.getAllVehiclesByCriteria(criteria, page, pageSize);
+    }
+
+    public VehicleOrderInfoDto updateVehicleOrderInfoById(
+            @PathVariable(name = "id") long id,
+            @RequestBody VehicleOrderInfoDto orderInfoDto){
+        return vehicleService.updateVehicleOrderInfoById(id, orderInfoDto);
+    }
+
+    public VehicleBasicInfoDto updateVehicleBasicInfoById(
+            @PathVariable(name = "id") long id,
+            @RequestBody VehicleBasicInfoDto basicInfoDto){
+        return vehicleService.updateVehicleBasicInfoById(id, basicInfoDto);
+    }
+
+    public VehicleTechnicalDataDto updateVehicleTechnicalDataById(
+            @PathVariable(name = "id") long id,
+            @RequestBody VehicleTechnicalDataDto technicalDataDto){
+        return vehicleService.updateVehicleTechnicalDataById(id, technicalDataDto);
+    }
+
+    public VehicleHistoryDto updateVehicleHistoryById(
+            @PathVariable(name = "id") long id,
+            @RequestBody VehicleHistoryDto vehicleHistoryDto){
+        return vehicleService.updateVehicleHistoryById(id, vehicleHistoryDto);
     }
 }

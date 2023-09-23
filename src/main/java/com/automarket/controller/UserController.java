@@ -30,7 +30,7 @@ public class UserController {
 
     @PostMapping
     public UserDto addNewUser(@RequestBody UserDto userDto){
-        User user = userMapper.UserParseFromDto(userDto);
+        User user = userMapper.mapFromDto(userDto);
         return userService.addNewUser(user);
     }
 
@@ -38,7 +38,7 @@ public class UserController {
     public UserDto updateUserById(
             @PathVariable("id") long id,
             @RequestBody UserDto userDto){
-        User user = userMapper.UserParseFromDto(userDto);
+        User user = userMapper.mapFromDto(userDto);
         return userService.updateUserById(id, user);
     }
 
@@ -46,5 +46,11 @@ public class UserController {
     public ResponseEntity<?> deleteUserByUserId(
             @PathVariable("id") long id){
         return userService.deleteUserByUserId(id);
+    }
+
+    @GetMapping("{id}")
+    public UserDto getUserByUserId(
+            @PathVariable("id") long id){
+        return userService.getUserByUserId(id);
     }
 }

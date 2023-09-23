@@ -34,7 +34,7 @@ public class UserService {
     public List<UserDto> getAllUsers(int page, int pageSize) {
         return userRepository
                 .findAll(PageRequest.of(page, pageSize))
-                .map(userMapper::UserParseToDto)
+                .map(userMapper::mapToDto)
                 .toList();
     }
 
@@ -45,7 +45,7 @@ public class UserService {
         validateUserByPhoneNumber(user.getPhoneNumber());
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepository.save(user);
-        return userMapper.UserParseToDto(user);
+        return userMapper.mapToDto(user);
     }
 
     public UserDto updateUserById(long id, User user) {
@@ -55,7 +55,7 @@ public class UserService {
         validateUserByUsername(user.getUsername());
         validateUserByPhoneNumber(user.getPhoneNumber());
         userRepository.save(user);
-        return userMapper.UserParseToDto(user);
+        return userMapper.mapToDto(user);
     }
 
     public ResponseEntity<?> deleteUserByUserId(long id) {
@@ -99,5 +99,15 @@ public class UserService {
             String message = String.format("User with id - '%d' not exist", id);
             throw new ItemNotFoundException(message, 40402L);
         }
+    }
+
+    public UserDto getUserByUserId(long id) {
+        String message = String.format("User with id - '%d' not exist", id);
+        return userRepository
+                .findById(id)
+                .map(userMapper::mapToDto)
+                .orElseThrow(
+                        () -> new ItemNotFoundException(message, 40402L)
+                );
     }
 }

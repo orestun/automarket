@@ -10,5 +10,6 @@ import org.springframework.stereotype.Repository;
 public interface VehicleRepository extends JpaRepository<Vehicle, Long>{
     Page<Vehicle> findAll(Pageable pageable);
 
+    Vehicle findById(long id);
     boolean existsByVINCode(String VINCode);
 }
