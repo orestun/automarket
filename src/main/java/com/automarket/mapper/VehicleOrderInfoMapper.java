@@ -3,8 +3,10 @@ package com.automarket.mapper;
 import com.automarket.dto.VehicleOrderInfoDto;
 import com.automarket.model.VehicleOrderInfo;
 
-public class VehicleOrderInfoMapper {
-    public VehicleOrderInfoDto orderInfoParseToDto(VehicleOrderInfo orderInfo){
+public class VehicleOrderInfoMapper implements Mapper<VehicleOrderInfo, VehicleOrderInfoDto>{
+
+    @Override
+    public VehicleOrderInfoDto mapToDto(VehicleOrderInfo orderInfo){
         VehicleOrderInfoDto orderInfoDto = new VehicleOrderInfoDto();
         orderInfoDto.setCountry(orderInfo.getCountry());
         orderInfoDto.setState(orderInfo.getState());
@@ -15,7 +17,8 @@ public class VehicleOrderInfoMapper {
         return orderInfoDto;
     }
 
-    public VehicleOrderInfo orderInfoParseFromDto(VehicleOrderInfoDto orderInfoDto){
+    @Override
+    public VehicleOrderInfo mapFromDto(VehicleOrderInfoDto orderInfoDto){
         VehicleOrderInfo orderInfo = new VehicleOrderInfo();
         orderInfo.setState(orderInfoDto.getState());
         orderInfo.setCountry(orderInfoDto.getCountry());

@@ -3,9 +3,10 @@ package com.automarket.mapper;
 import com.automarket.dto.VehicleHistoryDto;
 import com.automarket.model.VehicleHistory;
 
-public class VehicleHistoryMapper {
+public class VehicleHistoryMapper implements Mapper<VehicleHistory, VehicleHistoryDto> {
 
-    public VehicleHistoryDto historyParseToDto(VehicleHistory history){
+    @Override
+    public VehicleHistoryDto mapToDto(VehicleHistory history){
         VehicleHistoryDto historyDto = new VehicleHistoryDto();
         historyDto.setMileage(history.getMileage());
         historyDto.setYear(history.getYear());
@@ -15,7 +16,8 @@ public class VehicleHistoryMapper {
         return historyDto;
     }
 
-    public VehicleHistory historyParseFromDto(VehicleHistoryDto historyDto){
+    @Override
+    public VehicleHistory mapFromDto(VehicleHistoryDto historyDto){
         VehicleHistory history = new VehicleHistory();
         history.setMileage(historyDto.getMileage());
         history.setYear(historyDto.getYear());

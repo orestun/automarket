@@ -3,9 +3,10 @@ package com.automarket.mapper;
 import com.automarket.dto.VehicleBasicInfoDto;
 import com.automarket.model.VehicleBasicInfo;
 
-public class VehicleBasicInfoMapper {
+public class VehicleBasicInfoMapper implements Mapper<VehicleBasicInfo, VehicleBasicInfoDto>{
 
-    public VehicleBasicInfoDto basicInfoParseToDto(VehicleBasicInfo basicInfo){
+    @Override
+    public VehicleBasicInfoDto mapToDto(VehicleBasicInfo basicInfo){
         VehicleBasicInfoDto basicInfoDto = new VehicleBasicInfoDto();
         basicInfoDto.setInteriorColor(basicInfo.getInteriorColor());
         basicInfoDto.setExteriorColor(basicInfo.getExteriorColor());
@@ -15,7 +16,8 @@ public class VehicleBasicInfoMapper {
         return basicInfoDto;
     }
 
-    public VehicleBasicInfo basicInfoParseFromDto(VehicleBasicInfoDto basicInfoDto){
+    @Override
+    public VehicleBasicInfo mapFromDto(VehicleBasicInfoDto basicInfoDto){
         VehicleBasicInfo basicInfo = new VehicleBasicInfo();
         basicInfo.setInteriorColor(basicInfoDto.getInteriorColor());
         basicInfo.setExteriorColor(basicInfoDto.getExteriorColor());

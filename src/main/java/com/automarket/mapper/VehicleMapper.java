@@ -3,14 +3,15 @@ package com.automarket.mapper;
 import com.automarket.dto.VehicleDto;
 import com.automarket.model.Vehicle;
 
-public class VehicleMapper {
+public class VehicleMapper implements Mapper<Vehicle, VehicleDto>{
     private final VehicleHistoryMapper historyMapper = new VehicleHistoryMapper();
     private final VehicleBasicInfoMapper basicInfoMapper = new VehicleBasicInfoMapper();
     private final VehicleOrderInfoMapper orderInfoMapper = new VehicleOrderInfoMapper();
     private final VehicleTechnicalDataMapper technicalDataMapper = new VehicleTechnicalDataMapper();
     private final UserMapper userMapper = new UserMapper();
 
-    public VehicleDto vehicleParseToDto(Vehicle vehicle){
+    @Override
+    public VehicleDto mapToDto(Vehicle vehicle){
         VehicleDto vehicleDto = new VehicleDto();
         vehicleDto.setMake(vehicle.getMake());
         vehicleDto.setModel(vehicle.getModel());
@@ -19,34 +20,35 @@ public class VehicleMapper {
         vehicleDto.setCreateTimestamp(vehicle.getCreateTimestamp());
         vehicleDto.setUpdateTimeStamp(vehicle.getUpdateTimeStamp());
         vehicleDto
-                .setSeller(userMapper.UserParseToDto(vehicle.getSeller()));
+                .setSeller(userMapper.mapToDto(vehicle.getSeller()));
         vehicleDto
-                .setHistory(historyMapper.historyParseToDto(vehicle.getHistory()));
+                .setHistory(historyMapper.mapToDto(vehicle.getHistory()));
         vehicleDto
-                .setBasicInfo(basicInfoMapper.basicInfoParseToDto(vehicle.getBasicInfo()));
+                .setBasicInfo(basicInfoMapper.mapToDto(vehicle.getBasicInfo()));
         vehicleDto
-                .setOrderInfo(orderInfoMapper.orderInfoParseToDto(vehicle.getOrderInfo()));
+                .setOrderInfo(orderInfoMapper.mapToDto(vehicle.getOrderInfo()));
         vehicleDto
-                .setTechnicalData(technicalDataMapper.vehicleTechnicalDataParseToDto(vehicle.getTechnicalData()));
+                .setTechnicalData(technicalDataMapper.mapToDto(vehicle.getTechnicalData()));
         return vehicleDto;
     }
 
-    public Vehicle vehicleParseFromDto(VehicleDto vehicleDto){
+    @Override
+    public Vehicle mapFromDto(VehicleDto vehicleDto){
         Vehicle vehicle = new Vehicle();
         vehicle.setMake(vehicleDto.getMake());
         vehicle.setModel(vehicleDto.getModel());
         vehicle.setVINCode(vehicleDto.getVINCode());
         vehicle.setConfiguration(vehicleDto.getConfiguration());
         vehicle
-                .setSeller(userMapper.UserParseFromDto(vehicleDto.getSeller()));
+                .setSeller(userMapper.mapFromDto(vehicleDto.getSeller()));
         vehicle
-                .setHistory(historyMapper.historyParseFromDto(vehicleDto.getHistory()));
+                .setHistory(historyMapper.mapFromDto(vehicleDto.getHistory()));
         vehicle
-                .setBasicInfo(basicInfoMapper.basicInfoParseFromDto(vehicleDto.getBasicInfo()));
+                .setBasicInfo(basicInfoMapper.mapFromDto(vehicleDto.getBasicInfo()));
         vehicle
-                .setOrderInfo(orderInfoMapper.orderInfoParseFromDto(vehicleDto.getOrderInfo()));
+                .setOrderInfo(orderInfoMapper.mapFromDto(vehicleDto.getOrderInfo()));
         vehicle
-                .setTechnicalData(technicalDataMapper.vehicleTechnicalDataParseFromDto(vehicleDto.getTechnicalData()));
+                .setTechnicalData(technicalDataMapper.mapFromDto(vehicleDto.getTechnicalData()));
         return vehicle;
     }
 }

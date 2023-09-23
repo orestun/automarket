@@ -3,9 +3,10 @@ package com.automarket.mapper;
 import com.automarket.dto.VehicleTechnicalDataDto;
 import com.automarket.model.VehicleTechnicalData;
 
-public class VehicleTechnicalDataMapper {
+public class VehicleTechnicalDataMapper implements Mapper<VehicleTechnicalData, VehicleTechnicalDataDto> {
 
-    public VehicleTechnicalDataDto vehicleTechnicalDataParseToDto(VehicleTechnicalData technicalData){
+    @Override
+    public VehicleTechnicalDataDto mapToDto(VehicleTechnicalData technicalData){
         VehicleTechnicalDataDto technicalDataDto = new VehicleTechnicalDataDto();
         technicalDataDto.setGearbox(technicalData.getGearbox());
         technicalDataDto.setEngine(technicalData.getEngine());
@@ -15,7 +16,8 @@ public class VehicleTechnicalDataMapper {
         return technicalDataDto;
     }
 
-    public VehicleTechnicalData vehicleTechnicalDataParseFromDto(VehicleTechnicalDataDto technicalDataDto){
+    @Override
+    public VehicleTechnicalData mapFromDto(VehicleTechnicalDataDto technicalDataDto){
         VehicleTechnicalData technicalData = new VehicleTechnicalData();
         technicalData.setGearbox(technicalDataDto.getGearbox());
         technicalData.setEngine(technicalDataDto.getEngine());
