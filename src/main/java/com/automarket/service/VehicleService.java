@@ -101,6 +101,27 @@ public class VehicleService {
         return historyDto;
     }
 
+
+
+    public List<VehicleDto> getAllVehiclesByCriteria(VehicleSearchCriteriaDto criteria, int page, int pageSize) {
+        if(page > 0){
+            page--;
+        }else{
+            page = 0;
+        }
+        Pageable pageable = PageRequest.of(page, pageSize);
+        return vehicleCriteriaRepository
+                .getVehiclesWithAllCriteria(criteria, pageable)
+                .map(vehicleMapper::mapToDto)
+                .toList();
+    }
+
+    public VehicleDto getVehicleById(long id) {
+        validateIdExistence(id);
+        return vehicleMapper
+                .mapToDto(vehicleRepository.findById(id));
+    }
+
     private void validateVehicle(@Valid Vehicle vehicle){
         DataValidationHandler<Vehicle> validationHandler = new DataValidationHandler<>();
         String validationErrorsMessage = validationHandler.errorsRepresentation(vehicle);
@@ -121,18 +142,5 @@ public class VehicleService {
             String message = String.format("Vehicle with such id - '%d' not exist", id);
             throw new ItemNotFoundException(message, 40401L);
         }
-    }
-
-    public List<VehicleDto> getAllVehiclesByCriteria(VehicleSearchCriteriaDto criteria, int page, int pageSize) {
-        if(page > 0){
-            page--;
-        }else{
-            page = 0;
-        }
-        Pageable pageable = PageRequest.of(page, pageSize);
-        return vehicleCriteriaRepository
-                .getVehiclesWithAllCriteria(criteria, pageable)
-                .map(vehicleMapper::mapToDto)
-                .toList();
     }
 }

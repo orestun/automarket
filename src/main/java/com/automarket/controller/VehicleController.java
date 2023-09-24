@@ -57,27 +57,37 @@ public class VehicleController {
         return vehicleService.getAllVehiclesByCriteria(criteria, page, pageSize);
     }
 
+    @PatchMapping("update-order-info/{id}")
     public VehicleOrderInfoDto updateVehicleOrderInfoById(
             @PathVariable(name = "id") long id,
             @RequestBody VehicleOrderInfoDto orderInfoDto){
         return vehicleService.updateVehicleOrderInfoById(id, orderInfoDto);
     }
 
+    @PatchMapping("update-basic-info/{id}")
     public VehicleBasicInfoDto updateVehicleBasicInfoById(
             @PathVariable(name = "id") long id,
             @RequestBody VehicleBasicInfoDto basicInfoDto){
         return vehicleService.updateVehicleBasicInfoById(id, basicInfoDto);
     }
 
+    @PatchMapping("update-technical-data/{id}")
     public VehicleTechnicalDataDto updateVehicleTechnicalDataById(
             @PathVariable(name = "id") long id,
             @RequestBody VehicleTechnicalDataDto technicalDataDto){
         return vehicleService.updateVehicleTechnicalDataById(id, technicalDataDto);
     }
 
+    @PatchMapping("update-history/{id}")
     public VehicleHistoryDto updateVehicleHistoryById(
             @PathVariable(name = "id") long id,
             @RequestBody VehicleHistoryDto vehicleHistoryDto){
         return vehicleService.updateVehicleHistoryById(id, vehicleHistoryDto);
+    }
+
+    @GetMapping("{id}")
+    public VehicleDto getVehicleById(
+            @PathVariable(name = "id") long id){
+        return vehicleService.getVehicleById(id);
     }
 }
